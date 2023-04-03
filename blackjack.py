@@ -30,14 +30,14 @@ def play_game():
     print(f"Player's hand: {player_hand}")
     print(f"Dealer's hand: ['?', '{dealer_hand[1]}']")
     while True:
-        choice = input("Do you want to hit or stand? ")
-        if choice.lower() == 'hit':
+        choice = input("Do you want to hit or stand? e/q\n")
+        if choice.lower() == 'hit' or choice.lower()=='e':
             player_hand.append(deck.pop())
             print(f"Player's hand: {player_hand}")
             if hand_value(player_hand) > 21:
                 print("Bust! Dealer wins.")
                 return False
-        elif choice.lower() == 'stand':
+        elif choice.lower() == 'stand' or choice.lower()=='q':
             break
     while hand_value(dealer_hand) < 17:
         dealer_hand.append(deck.pop())
@@ -47,22 +47,22 @@ def play_game():
         print("Dealer busts! Player wins.")
         return True
     elif hand_value(dealer_hand) > hand_value(player_hand):
-        print("Dealer wins.")
+        print("Dealer wins.\n")
         return False
     elif hand_value(player_hand) > hand_value(dealer_hand):
-        print("Player wins.")
+        print("Player wins.\n")
         return True
     else:
-        print("Push (tie).")
+        print("Push (tie).\n")
         return None
 
 # Main loop
-money = 100
+money = 10000
 while money > 0:
-    print(f"Your current balance is {money}.")
-    bet = int(input("How much do you want to bet? "))
+    print(f"Your current balance is {money}.\n")
+    bet = int(input("How much do you want to bet?\n"))
     if bet > money:
-        print("You don't have enough money for that bet.")
+        print("You don't have enough money for that bet.\n")
         continue
     result = play_game()
     if result == True:
